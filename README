@@ -1,0 +1,126 @@
+# Logistic Regression Using SMOTE
+
+This project demonstrates binary classification for employee promotion prediction using **Logistic Regression** with **SMOTE (Synthetic Minority Over-sampling Technique)** to address class imbalance.
+
+## Project Overview
+
+The notebook:
+
+1. Imports the required Python libraries.
+2. Loads the `employee_promotion.csv` dataset.
+3. Performs basic dataset inspection and descriptive analysis.
+4. Checks the distribution of the target variable and missing values.
+5. Separates features (`X`) from the target (`y`).
+6. Splits the data into training and testing sets.
+7. Applies SMOTE to the training data to balance the target classes.
+8. Trains a Logistic Regression model.
+9. Generates predictions and evaluates the model using:
+   - Accuracy
+   - Confusion Matrix
+   - Classification Report
+10. Visualizes the confusion matrix as a heatmap.
+
+## Dataset
+
+The provided dataset contains **2,000 records** and the following 5 columns:
+
+| Column | Description |
+|---|---|
+| `Age` | Employee age |
+| `Experience_Years` | Years of experience |
+| `Last_Year_Rating` | Employee's rating from the previous year |
+| `Training_Hours` | Training hours |
+| `Promotion` | Binary target indicating promotion outcome |
+
+The dataset contains **no missing values**.
+
+### Target Distribution
+
+The `Promotion` target is imbalanced:
+
+- `0`: 1,408 records
+- `1`: 592 records
+
+SMOTE is therefore applied to the training set before fitting the Logistic Regression model.
+
+## Methodology
+
+### 1. Train/Test Split
+
+The data is split into:
+
+- **70% training data**
+- **30% testing data**
+- `random_state=32`
+
+### 2. SMOTE
+
+SMOTE is applied only to the training data to increase representation of the minority class while keeping the test set unchanged.
+
+The notebook uses:
+
+```python
+SMOTE(random_state=42)
+```
+
+### 3. Logistic Regression
+
+A Logistic Regression classifier is trained with:
+
+```python
+LogisticRegression(max_iter=1000)
+```
+
+## Model Evaluation
+
+The notebook evaluates the trained model on the test set using:
+
+```python
+accuracy_score
+confusion_matrix
+classification_report
+```
+
+It also calculates class probabilities with `predict_proba()` and visualizes the confusion matrix using a Seaborn heatmap.
+
+The README does not report fixed evaluation scores because the uploaded notebook contains the evaluation code but no stored output values for those metrics.
+
+## Project Files
+
+```text
+.
+├── Logistic_Regression_using_smote.ipynb
+├── employee_promotion.csv
+└── README.md
+```
+
+## Requirements
+
+The notebook uses the following Python packages:
+
+- pandas
+- numpy
+- matplotlib
+- seaborn
+- scikit-learn
+- imbalanced-learn
+- joblib
+
+You can install the main dependencies with:
+
+```bash
+pip install pandas numpy matplotlib seaborn scikit-learn imbalanced-learn joblib
+```
+
+## Running the Project
+
+1. Place `employee_promotion.csv` in the notebook's working directory.
+2. Open `Logistic_Regression_using_smote.ipynb` in Jupyter Notebook, JupyterLab, or Google Colab.
+3. Run the cells in order.
+4. Review the model accuracy, confusion matrix, and classification report produced by the notebook.
+
+## Notes
+
+- The notebook includes a Google Colab upload step for selecting the CSV file.
+- SMOTE is applied after the train/test split, so synthetic samples are not introduced into the test set.
+- The notebook imports `joblib`, although the provided cells do not include a model-saving step.
